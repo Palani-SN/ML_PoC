@@ -488,6 +488,6 @@ Using TensorFlow backend.
 
 ```
 
-- Output Image will pop up with segmentation maasks applied as per pre-trained weights.
+- Output Image will pop up with segmentation masks applied as per pre-trained weights.
 
 ![](https://github.com/Palani-SN/ML_PoC/blob/main/output.png?raw=true)
