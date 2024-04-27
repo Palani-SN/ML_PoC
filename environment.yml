@@ -1,0 +1,6 @@
+name: hash_dataset
+dependencies:
+  - python=3.7.3
+  - pydenticon
+  - opencv-python
+  - pandas
