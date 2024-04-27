@@ -18,7 +18,7 @@ def conf(region_id, region_shape_attributes, region_attributes):
 
 class Template:
 
-    def __init__(self, x:int=4096, y:int=2160) -> None:
+    def __init__(self, x:int=4096, y:int=2160, folder={'jpg': 'samples', 'csv': 'annos'}) -> None:
         
         self.__blank = np.zeros((y, x, 3), dtype=np.uint8)
         self.__reserved = []
@@ -26,7 +26,7 @@ class Template:
         self.__annos = []
         self._region_id = 0
         self.select_mode = 'DEV'
-        self.folder = {'jpg': 'samples', 'csv': 'annos'}
+        self.folder = folder
         os.makedirs(name=f'{self.folder["jpg"]}', exist_ok=True)
         os.makedirs(name=f'{self.folder["csv"]}', exist_ok=True)
 
@@ -115,7 +115,7 @@ if __name__ == '__main__':
     # Validation Set
     for sample in range(0, 10):
         print(f'Creating Sample_{sample}...')
-        template = Template(x=512, y=512)
+        template = Template(x=512, y=512, folder={'jpg': 'samples', 'csv': 'annos'})
         template.select_mode = 'REL'
         for identicon in range(0, 20):
             template.affix(identicon)
@@ -129,9 +129,8 @@ if __name__ == '__main__':
     # Training Set
     for sample in range(0, 10):
         print(f'Creating Sample_{sample}...')
-        template = Template(x=512, y=512)
+        template = Template(x=512, y=512, folder={'jpg': 'train_samples', 'csv': 'train_annos'})
         template.select_mode = 'REL'
-        template.folder = {'jpg': 'train_samples', 'csv': 'train_annos'}
         for identicon in range(0, 20):
             template.affix(identicon)
         for identicon in range(0, 20):
@@ -144,9 +143,8 @@ if __name__ == '__main__':
     # Test Set
     for sample in range(0, 10):
         print(f'Creating Sample_{sample}...')
-        template = Template(x=512, y=512)
+        template = Template(x=512, y=512, folder={'jpg': 'test_samples', 'csv': 'test_annos'})
         template.select_mode = 'REL'
-        template.folder = {'jpg': 'test_samples', 'csv': 'test_annos'}
         for identicon in range(0, 20):
             template.affix(identicon)
         for identicon in range(0, 20):
