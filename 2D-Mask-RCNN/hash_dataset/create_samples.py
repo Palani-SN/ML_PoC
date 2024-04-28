@@ -22,7 +22,7 @@ class Template:
         
         self.__blank = np.zeros((y, x, 3), dtype=np.uint8)
         self.__reserved = []
-        self.__margin = 50
+        self.__margin = 30
         self.__annos = []
         self._region_id = 0
         self.select_mode = 'DEV'
@@ -115,13 +115,13 @@ if __name__ == '__main__':
     # Validation Set
     for sample in range(0, 10):
         print(f'Creating Sample_{sample}...')
-        template = Template(x=512, y=512, folder={'jpg': 'samples', 'csv': 'annos'})
+        template = Template(x=256, y=256, folder={'jpg': 'samples', 'csv': 'annos'})
         template.select_mode = 'REL'
-        for identicon in range(0, 20):
+        for identicon in range(0, 10):
             template.affix(identicon)
-        for identicon in range(0, 20):
+        for identicon in range(0, 10):
             template.affix(identicon)
-        for identicon in range(0, 20):
+        for identicon in range(0, 10):
             template.affix(identicon)
         template.close(f'sample_{sample}')
         print('Done')
@@ -129,13 +129,13 @@ if __name__ == '__main__':
     # Training Set
     for sample in range(0, 10):
         print(f'Creating Sample_{sample}...')
-        template = Template(x=512, y=512, folder={'jpg': 'train_samples', 'csv': 'train_annos'})
+        template = Template(x=256, y=256, folder={'jpg': 'train_samples', 'csv': 'train_annos'})
         template.select_mode = 'REL'
-        for identicon in range(0, 20):
+        for identicon in range(0, 10):
             template.affix(identicon)
-        for identicon in range(0, 20):
+        for identicon in range(0, 10):
             template.affix(identicon)
-        for identicon in range(0, 20):
+        for identicon in range(0, 10):
             template.affix(identicon)
         template.close(f'sample_{sample}')
         print('Done')
@@ -143,13 +143,13 @@ if __name__ == '__main__':
     # Test Set
     for sample in range(0, 10):
         print(f'Creating Sample_{sample}...')
-        template = Template(x=512, y=512, folder={'jpg': 'test_samples', 'csv': 'test_annos'})
+        template = Template(x=256, y=256, folder={'jpg': 'test_samples', 'csv': 'test_annos'})
         template.select_mode = 'REL'
-        for identicon in range(0, 20):
+        for identicon in range(0, 10):
             template.affix(identicon)
-        for identicon in range(0, 20):
+        for identicon in range(0, 10):
             template.affix(identicon)
-        for identicon in range(0, 20):
+        for identicon in range(0, 10):
             template.affix(identicon)
         template.close(f'sample_{sample}')
         print('Done')

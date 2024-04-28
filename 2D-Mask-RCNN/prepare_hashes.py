@@ -27,10 +27,10 @@ class HashTrainDataset(utils.Dataset):
     def extract_masks(self, fname):
 
         DF = pd.read_csv(fname)
-        masks = np.zeros([512, 512, len(DF.index)], dtype='uint8')
+        masks = np.zeros([256, 256, len(DF.index)], dtype='uint8')
         classes = []
         for idx, row in DF.iterrows():
-            mask = np.zeros([512, 512], dtype=np.uint8)
+            mask = np.zeros([256, 256], dtype=np.uint8)
             # region shape attributes
             region_shape_attributes = json.loads(row['region_shape_attributes'])
             all_points_x = region_shape_attributes['all_points_x']
@@ -78,10 +78,10 @@ class HashTestDataset(utils.Dataset):
     def extract_masks(self, fname):
 
         DF = pd.read_csv(fname)
-        masks = np.zeros([512, 512, len(DF.index)], dtype='uint8')
+        masks = np.zeros([256, 256, len(DF.index)], dtype='uint8')
         classes = []
         for idx, row in DF.iterrows():
-            mask = np.zeros([512, 512], dtype=np.uint8)
+            mask = np.zeros([256, 256], dtype=np.uint8)
             # region shape attributes
             region_shape_attributes = json.loads(row['region_shape_attributes'])
             all_points_x = region_shape_attributes['all_points_x']

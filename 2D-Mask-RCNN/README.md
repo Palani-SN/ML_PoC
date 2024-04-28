@@ -490,4 +490,99 @@ Using TensorFlow backend.
 
 - Output Image will pop up with segmentation masks applied as per pre-trained weights.
 
-![](https://github.com/Palani-SN/ML_PoC/blob/main/output.png?raw=true)
+![](https://github.com/Palani-SN/ML_PoC/blob/main/2D-Mask-RCNN/coco_model_check.png?raw=true) 
+
+- Generate hashed by executing **hash_dataset/identicons/create_identicons.py**, hash files will be generated in **hash_dataset/identicons/** folder,
+
+```
+output
+
+(hash_dataset) palani-sn@DESKTOP-EJPA9NB:/mnt/d/GitRepos/ML_PoC/2D-Mask-RCNN/hash_dataset/identicons$ python create_identicons.py
+saving hash_0.png
+saving hash_1.png
+saving hash_2.png
+saving hash_3.png
+saving hash_4.png
+saving hash_5.png
+saving hash_6.png
+saving hash_7.png
+saving hash_8.png
+saving hash_9.png
+
+```
+
+- Generate dataset by executing **hash_dataset/create_samples.py**, dataset for training, testing & validation will be created within train_samples, train_annos, test_samples, test_annos, samples, annos folders repectively.
+- Execute **prepare_hashes.py** file to manually infer if the dataset & masks are parsed in the right sense, and proceed further to train the model
+
+![](https://github.com/Palani-SN/ML_PoC/blob/main/2D-Mask-RCNN/masks.png?raw=true) 
+
+- Execute **train_hashmodel.py** script for building/training the model with the generated dataset.
+
+```
+output
+
+(hash_dataset) palani-sn@DESKTOP-EJPA9NB:/mnt/d/GitRepos/ML_PoC/2D-Mask-RCNN$ python train_hashmodel.py
+Using TensorFlow backend.
+2024-04-28 19:16:50.803593: I tensorflow/core/platform/cpu_feature_guard.cc:142] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 FMA
+2024-04-28 19:16:50.813132: I tensorflow/core/platform/profile_utils/cpu_utils.cc:94] CPU Frequency: 2995200000 Hz
+2024-04-28 19:16:50.814994: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x559bc48d39f0 executing computations on platform Host. Devices:
+2024-04-28 19:16:50.815021: I tensorflow/compiler/xla/service/service.cc:175]   StreamExecutor device (0): Host, Default Version
+
+Starting at epoch 0. LR=0.001
+
+Checkpoint Path: \logdir\train/mask_rcnn_hash_cfg_{epoch:04d}.h5
+Selecting layers to train
+fpn_c5p5               (Conv2D)
+fpn_c4p4               (Conv2D)
+fpn_c3p3               (Conv2D)
+fpn_c2p2               (Conv2D)
+fpn_p5                 (Conv2D)
+fpn_p2                 (Conv2D)
+fpn_p3                 (Conv2D)
+fpn_p4                 (Conv2D)
+In model:  rpn_model
+    rpn_conv_shared        (Conv2D)
+    rpn_class_raw          (Conv2D)
+    rpn_bbox_pred          (Conv2D)
+mrcnn_mask_conv1       (TimeDistributed)
+mrcnn_mask_bn1         (TimeDistributed)
+mrcnn_mask_conv2       (TimeDistributed)
+mrcnn_mask_bn2         (TimeDistributed)
+mrcnn_class_conv1      (TimeDistributed)
+mrcnn_class_bn1        (TimeDistributed)
+mrcnn_mask_conv3       (TimeDistributed)
+mrcnn_mask_bn3         (TimeDistributed)
+mrcnn_class_conv2      (TimeDistributed)
+mrcnn_class_bn2        (TimeDistributed)
+mrcnn_mask_conv4       (TimeDistributed)
+mrcnn_mask_bn4         (TimeDistributed)
+mrcnn_bbox_fc          (TimeDistributed)
+mrcnn_mask_deconv      (TimeDistributed)
+mrcnn_class_logits     (TimeDistributed)
+mrcnn_mask             (TimeDistributed)
+/home/palani-sn/miniconda3/envs/hash_dataset/lib/python3.7/site-packages/tensorflow_core/python/framework/indexed_slices.py:424: UserWarning: Converting sparse IndexedSlices to a dense Tensor of unknown shape. This may consume a large amount of memory.
+  "Converting sparse IndexedSlices to a dense Tensor of unknown shape. "
+/home/palani-sn/miniconda3/envs/hash_dataset/lib/python3.7/site-packages/tensorflow_core/python/framework/indexed_slices.py:424: UserWarning: Converting sparse IndexedSlices to a dense Tensor of unknown shape. This may consume a large amount of memory.
+  "Converting sparse IndexedSlices to a dense Tensor of unknown shape. "
+/home/palani-sn/miniconda3/envs/hash_dataset/lib/python3.7/site-packages/tensorflow_core/python/framework/indexed_slices.py:424: UserWarning: Converting sparse IndexedSlices to a dense Tensor of unknown shape. This may consume a large amount of memory.
+  "Converting sparse IndexedSlices to a dense Tensor of unknown shape. "
+/home/palani-sn/miniconda3/envs/hash_dataset/lib/python3.7/site-packages/keras/engine/training_generator.py:49: UserWarning: Using a generator with `use_multiprocessing=True` and multiple workers may duplicate your data. Please consider using the `keras.utils.Sequence class.
+  UserWarning('Using a generator with `use_multiprocessing=True`'
+WARNING:tensorflow:Model failed to serialize as JSON. Ignoring... can't pickle _thread.RLock objects
+Epoch 1/4
+ 1/25 [>.............................] - ETA: 8:25 - loss: 5.32732024-04-28 19:17:19.087823: I tensorflow/core/profiler/lib/profiler_session.cc:184] Profiler session started.
+25/25 [==============================] - 332s 13s/step - loss: 2.4247 - val_loss: 1.5967
+Epoch 2/4
+25/25 [==============================] - 323s 13s/step - loss: 1.0551 - val_loss: 1.2838
+Epoch 3/4
+25/25 [==============================] - 330s 13s/step - loss: 0.6448 - val_loss: 1.5343
+Epoch 4/4
+25/25 [==============================] - 321s 13s/step - loss: 0.6723 - val_loss: 1.3822
+
+```
+
+- Use **test_hashmodel.py** script to check if the instance segmentation of the hashes happen fine on the validation dataset.
+
+![](https://github.com/Palani-SN/ML_PoC/blob/main/2D-Mask-RCNN/inference.png?raw=true) 
+
+- with limited resources & dataset samples, the weights are learned by the model, for efficiently identifying hashes (refer two instances of hash_7 & hash_0 is mapped rightly), there are limited flaws which can be fixed by increasing the quality of dataset samples, while, accuracy can be improved further by training on better compute resources for larger iterations.
