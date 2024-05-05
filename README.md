@@ -2,6 +2,8 @@
 
 ## Citation
 
+### 2D-Mask-RCNN
+
 reference : https://github.com/ahmedfgad/Mask-RCNN-TF2 ( matterport-maskrcnn ported to tensorflow-2 )
 
 Use this bibtex to cite this repository:
@@ -15,3 +17,10 @@ Use this bibtex to cite this repository:
   howpublished={\url{https://github.com/matterport/Mask_RCNN}},
 }
 ```
+- Completed
+
+### 3D-Mask-RCNN
+
+reference : https://github.com/sankalpmittal1911-BitSian/Mask-RCNN-3D-Implementation ( initial-implementation of matterport-maskrcnn extended for 3D )
+
+- In Progress

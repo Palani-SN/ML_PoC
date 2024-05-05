@@ -1,0 +1,7 @@
+dot_dataset/*/*.png
+dot_dataset/*/*.ome.tif
+dot_dataset/*/*.csv
+dot_dataset/*/*.jpg
+Miniconda3-latest-Linux-x86_64.sh
+mask_rcnn_coco.h5
+mrcnn/__pycache__/*.pyc
