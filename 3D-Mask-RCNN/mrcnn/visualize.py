@@ -314,7 +314,7 @@ def display_top_masks(images, mask, class_ids, class_names, limit=4):
         to_display.append(image)
         # print(image.shape)
         # print(image.shape)
-        titles.append("H x W ={}x{}".format(image.shape[0], image.shape[1]))
+        titles.append("D x H x W ={}x{}x{}".format(layer, image.shape[0], image.shape[1]))
         # Pick top prominent classes in this image
         unique_class_ids = np.unique(class_ids)
         mask_area = [np.sum(mask[layer][:, :, np.where(class_ids == i)[0]])
