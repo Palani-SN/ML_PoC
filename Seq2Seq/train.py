@@ -15,8 +15,19 @@ start_time = time.time()
 with open("eng2morse.json", "r") as f:
     words_2_morse_dataset = json.load(f)
 
+
+def top_n_by_key_length(d, n):
+    # Sort items by length of keys (descending) and return top n
+    return dict(
+        sorted(d.items(), key=lambda item: len(str(item[0])) > 10, reverse=True)[:n]
+    )
+
+
 # Example English ↔ Morse dataset (use larger set for real)
-pairs = list(words_2_morse_dataset.items())[:10000]
+top_n = top_n_by_key_length(words_2_morse_dataset, 2000)
+# print(len(top_n))
+pairs = list(top_n.items())[:2000]
+# print(pairs)
 
 # Create vocab
 from string import ascii_lowercase
